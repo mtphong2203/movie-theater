@@ -1,0 +1,78 @@
+<header class="bg-gray-900 text-white text-lg shadow-md">
+  <div class="header_contain w-[80%] m-auto flex justify-between items-center">
+    <a [routerLink]="['/']" class="header__brand">
+      <img [src]="brand" class="w-14 h-14 rounded-md" alt="Logo Cinema" />
+    </a>
+    <nav class="navbar">
+      <ul class="nav-list flex">
+        <li class="nav-item">
+          <a
+            [routerLink]="['/']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/schedule']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >Schedule Show</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/promotion']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >Promotion</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/about']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >About</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/manager']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >Management</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/ticket-price']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >Ticket Price</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/contact']"
+            class="nav-link block p-4 hover:text-red-400 hover:font-medium"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="profile">
+      <ul class="nav-list flex gap-4">
+        <li class="nav-item">
+          <a
+            [routerLink]="['/auth/login']"
+            class="nav-link block px-8 py-1 hover:bg-red-800 bg-red-600 border border-white rounded-full"
+            >Login</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['/register']"
+            class="nav-link block px-8 py-1 hover:bg-slate-100 hover:text-black rounded-full border border-white"
+            >Register</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
