@@ -5,6 +5,7 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
+import com.maiphong.movie_theater.dtos.auth.RegisterRequestDTO;
 import com.maiphong.movie_theater.dtos.user.UserCreateUpdateDTO;
 import com.maiphong.movie_theater.dtos.user.UserMasterDTO;
 import com.maiphong.movie_theater.entities.User;
@@ -14,7 +15,10 @@ public interface UserMapper {
 
     User toEntity(UserCreateUpdateDTO DTO);
 
+    User toEntity(RegisterRequestDTO registerDTO);
+
     User toEntity(UserCreateUpdateDTO DTO, @MappingTarget User user);
 
     UserMasterDTO toMasterDTO(User user);
+
 }

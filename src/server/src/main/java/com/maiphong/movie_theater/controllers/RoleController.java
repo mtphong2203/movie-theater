@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.maiphong.movie_theater.dtos.role.RoleCreateUpdateDTO;
 import com.maiphong.movie_theater.dtos.role.RoleMasterDTO;
-import com.maiphong.movie_theater.dtos.user.UserMasterDTO;
 import com.maiphong.movie_theater.response.CustomPageData;
 import com.maiphong.movie_theater.services.RoleService;
 

@@ -1,6 +1,7 @@
 package com.maiphong.movie_theater.entities;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,8 +46,8 @@ public class User extends MasterEntity {
         return this.firstName + " " + this.lastName;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToMany()
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 }

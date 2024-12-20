@@ -1,9 +1,9 @@
 package com.maiphong.movie_theater.dtos.user;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import com.maiphong.movie_theater.dtos.MasterDTO;
-import com.maiphong.movie_theater.dtos.role.RoleDTO;
 import com.maiphong.movie_theater.entities.Gender;
 
 import lombok.*;
@@ -30,6 +30,6 @@ public class UserMasterDTO extends MasterDTO {
 
     private String address;
 
-    private RoleDTO roleDTO;
+    private Set<String> role;
 
 }
