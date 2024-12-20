@@ -1,6 +1,8 @@
 package com.maiphong.movie_theater.dtos.user;
 
 import java.time.LocalDate;
+import java.util.UUID;
+
 import org.hibernate.validator.constraints.Length;
 
 import com.maiphong.movie_theater.dtos.MasterCreateUpdateDTO;
@@ -44,4 +46,6 @@ public class UserCreateUpdateDTO extends MasterCreateUpdateDTO {
 
     @NotNull(message = "Confirm password is required")
     private String confirmPassword;
+
+    private UUID roleId;
 }

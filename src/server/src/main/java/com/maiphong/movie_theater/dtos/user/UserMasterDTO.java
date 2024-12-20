@@ -3,6 +3,7 @@ package com.maiphong.movie_theater.dtos.user;
 import java.time.LocalDate;
 
 import com.maiphong.movie_theater.dtos.MasterDTO;
+import com.maiphong.movie_theater.dtos.role.RoleDTO;
 import com.maiphong.movie_theater.entities.Gender;
 
 import lombok.*;
@@ -28,5 +29,7 @@ public class UserMasterDTO extends MasterDTO {
     private String phoneNumber;
 
     private String address;
+
+    private RoleDTO roleDTO;
 
 }

@@ -9,11 +9,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.maiphong.movie_theater.dtos.role.RoleDTO;
 import com.maiphong.movie_theater.dtos.user.UserCreateUpdateDTO;
 import com.maiphong.movie_theater.dtos.user.UserMasterDTO;
 import com.maiphong.movie_theater.entities.User;
 import com.maiphong.movie_theater.exceptions.ResourceNotFoundException;
 import com.maiphong.movie_theater.mappers.UserMapper;
+import com.maiphong.movie_theater.repositories.RoleRepository;
 import com.maiphong.movie_theater.repositories.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -23,10 +25,12 @@ import jakarta.transaction.Transactional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.userMapper = userMapper;
     }
 
@@ -36,6 +40,16 @@ public class UserServiceImpl implements UserService {
 
         var userMasters = users.stream().map(user -> {
             UserMasterDTO userMaster = userMapper.toMasterDTO(user);
+            if (user.getRole() != null) {
+                // Role dto set to master user
+                RoleDTO roleDTO = new RoleDTO();
+                roleDTO.setId(user.getRole().getId());
+                roleDTO.setName(user.getRole().getName());
+                roleDTO.setDescription(user.getRole().getDescription());
+                roleDTO.setActive(user.getRole().isActive());
+
+                userMaster.setRoleDTO(roleDTO);
+            }
             return userMaster;
         }).toList();
 
@@ -50,6 +64,16 @@ public class UserServiceImpl implements UserService {
             throw new ResourceNotFoundException("User is not found");
         }
         UserMasterDTO userMaster = userMapper.toMasterDTO(user);
+        if (user.getRole() != null) {
+            // Role dto set to master user
+            RoleDTO roleDTO = new RoleDTO();
+            roleDTO.setId(user.getRole().getId());
+            roleDTO.setName(user.getRole().getName());
+            roleDTO.setDescription(user.getRole().getDescription());
+            roleDTO.setActive(user.getRole().isActive());
+
+            userMaster.setRoleDTO(roleDTO);
+        }
         return userMaster;
     }
 
@@ -68,6 +92,16 @@ public class UserServiceImpl implements UserService {
 
         List<UserMasterDTO> userMasters = users.stream().map(user -> {
             var userMaster = userMapper.toMasterDTO(user);
+            if (user.getRole() != null) {
+                // Role dto set to master user
+                RoleDTO roleDTO = new RoleDTO();
+                roleDTO.setId(user.getRole().getId());
+                roleDTO.setName(user.getRole().getName());
+                roleDTO.setDescription(user.getRole().getDescription());
+                roleDTO.setActive(user.getRole().isActive());
+
+                userMaster.setRoleDTO(roleDTO);
+            }
             return userMaster;
         }).toList();
 
@@ -89,6 +123,16 @@ public class UserServiceImpl implements UserService {
 
         Page<UserMasterDTO> userMasters = users.map(user -> {
             var userMaster = userMapper.toMasterDTO(user);
+            if (user.getRole() != null) {
+                // Role dto set to master user
+                RoleDTO roleDTO = new RoleDTO();
+                roleDTO.setId(user.getRole().getId());
+                roleDTO.setName(user.getRole().getName());
+                roleDTO.setDescription(user.getRole().getDescription());
+                roleDTO.setActive(user.getRole().isActive());
+
+                userMaster.setRoleDTO(roleDTO);
+            }
             return userMaster;
         });
 
@@ -108,10 +152,25 @@ public class UserServiceImpl implements UserService {
         }
 
         User newUser = userMapper.toEntity(userDTO);
+        // Check if user has role
+        if (userDTO.getRoleId() != null) {
+            var role = roleRepository.findById(userDTO.getRoleId()).orElse(null);
+            if (role != null) {
+                newUser.setRole(role);
+            }
+        }
 
         newUser = userRepository.save(newUser);
 
         UserMasterDTO userMaster = userMapper.toMasterDTO(newUser);
+        // Role dto set to master user
+        RoleDTO roleDTO = new RoleDTO();
+        roleDTO.setId(newUser.getRole().getId());
+        roleDTO.setName(newUser.getRole().getName());
+        roleDTO.setDescription(newUser.getRole().getDescription());
+        roleDTO.setActive(newUser.getRole().isActive());
+
+        userMaster.setRoleDTO(roleDTO);
 
         return userMaster;
     }
@@ -130,10 +189,26 @@ public class UserServiceImpl implements UserService {
 
         user = userMapper.toEntity(userDTO, user);
         user.setUpdatedAt(LocalDateTime.now());
+        // Check if user has role
+        if (userDTO.getRoleId() != null) {
+            var role = roleRepository.findById(userDTO.getRoleId()).orElse(null);
+            if (role != null) {
+                user.setRole(role);
+            }
+        }
 
         user = userRepository.save(user);
 
         UserMasterDTO userMaster = userMapper.toMasterDTO(user);
+
+        // Role dto set to master user
+        RoleDTO roleDTO = new RoleDTO();
+        roleDTO.setId(user.getRole().getId());
+        roleDTO.setName(user.getRole().getName());
+        roleDTO.setDescription(user.getRole().getDescription());
+        roleDTO.setActive(user.getRole().isActive());
+
+        userMaster.setRoleDTO(roleDTO);
 
         return userMaster;
     }

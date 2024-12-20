@@ -2,10 +2,7 @@ package com.maiphong.movie_theater.entities;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -47,5 +44,9 @@ public class User extends MasterEntity {
     public String getDisplayName() {
         return this.firstName + " " + this.lastName;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 }
