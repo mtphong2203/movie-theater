@@ -1,16 +1,20 @@
 package com.maiphong.movie_theater.controllers;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Links;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.maiphong.movie_theater.dtos.user.UserCreateUpdateDTO;
 import com.maiphong.movie_theater.dtos.user.UserMasterDTO;
+import com.maiphong.movie_theater.response.CustomPageData;
 import com.maiphong.movie_theater.services.UserService;
 
 import jakarta.validation.Valid;
@@ -63,7 +67,13 @@ public class UserController {
 
         var pageModel = pagedResource.toModel(userMasters);
 
-        return ResponseEntity.ok(pageModel);
+        Collection<EntityModel<UserMasterDTO>> data = pageModel.getContent();
+
+        Links links = pageModel.getLinks();
+
+        var response = new CustomPageData<EntityModel<UserMasterDTO>>(data, links, pageModel.getMetadata());
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping

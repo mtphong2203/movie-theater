@@ -1,16 +1,21 @@
 package com.maiphong.movie_theater.controllers;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Links;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.maiphong.movie_theater.dtos.role.RoleCreateUpdateDTO;
 import com.maiphong.movie_theater.dtos.role.RoleMasterDTO;
+import com.maiphong.movie_theater.dtos.user.UserMasterDTO;
+import com.maiphong.movie_theater.response.CustomPageData;
 import com.maiphong.movie_theater.services.RoleService;
 
 import jakarta.validation.Valid;
@@ -63,7 +68,13 @@ public class RoleController {
 
         var pageModel = pagedResource.toModel(roleMasters);
 
-        return ResponseEntity.ok(pageModel);
+        Collection<EntityModel<RoleMasterDTO>> data = pageModel.getContent();
+
+        Links links = pageModel.getLinks();
+
+        var response = new CustomPageData<EntityModel<RoleMasterDTO>>(data, links, pageModel.getMetadata());
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
