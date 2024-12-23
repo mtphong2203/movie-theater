@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { ROLE_SERVICE } from '../../../../constants/injection.const';
 import { IRoleService } from '../../../../services/role/role-service.interface';
-import { faCancel, faSave, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RoleMasterDto } from '../../../../models/role/role-master.model';
+import { MasterDetailsComponent } from '../../master-details/master-details.component';
 
 @Component({
   selector: 'app-role-details',
@@ -13,18 +13,11 @@ import { RoleMasterDto } from '../../../../models/role/role-master.model';
   templateUrl: './role-details.component.html',
   styleUrl: './role-details.component.css'
 })
-export class RoleDetailsComponent implements OnChanges {
+export class RoleDetailsComponent extends MasterDetailsComponent<RoleMasterDto> implements OnChanges {
 
-  @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
-  @Input('isEdit') isEdit: boolean = false;
-  @Input('dataEdit') dataEdit: RoleMasterDto | undefined;
-
-  public faCancel: IconDefinition = faCancel;
-  public faSave: IconDefinition = faSave;
-
-  public form!: FormGroup;
-
-  constructor(@Inject(ROLE_SERVICE) private roleService: IRoleService) { }
+  constructor(@Inject(ROLE_SERVICE) private roleService: IRoleService) {
+    super();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.createForm();

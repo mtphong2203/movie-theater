@@ -4,13 +4,13 @@ import { ROLE_SERVICE } from '../../../constants/injection.const';
 import { IRoleService } from '../../../services/role/role-service.interface';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { faPlus, faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RoleDetailsComponent } from "./role-details/role-details.component";
 import { TableComponent } from "../../../core/components/table/table.component";
 import { catchError, of } from 'rxjs';
 import { RoleMasterDto } from '../../../models/role/role-master.model';
 import { Column } from '../../../models/common/column.model';
 import { ResponseData } from '../../../models/response-data.model';
+import { MasterListComponent } from '../master-list/master-list.component';
 
 @Component({
   selector: 'app-role-list',
@@ -19,20 +19,7 @@ import { ResponseData } from '../../../models/response-data.model';
   templateUrl: './role-list.component.html',
   styleUrl: './role-list.component.css'
 })
-export class RoleListComponent implements OnInit {
-
-  public form!: FormGroup;
-
-  public faSearch: IconDefinition = faSearch;
-  public faPlus: IconDefinition = faPlus;
-
-  public isShow: boolean = false;
-  public isEdit: boolean = false;
-
-  public data: RoleMasterDto[] = [];
-  public dataEdit: RoleMasterDto | undefined;
-
-  public response: string = '';
+export class RoleListComponent extends MasterListComponent<RoleMasterDto> implements OnInit {
 
   public columns: Column[] = [
     { name: 'name', title: 'Title' },
@@ -40,7 +27,7 @@ export class RoleListComponent implements OnInit {
     { name: 'active', title: 'Active' },
   ]
 
-  constructor(@Inject(ROLE_SERVICE) private roleService: IRoleService) { }
+  constructor(@Inject(ROLE_SERVICE) private roleService: IRoleService) { super() }
 
   ngOnInit(): void {
     this.createForm();
