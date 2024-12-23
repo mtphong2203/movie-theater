@@ -4,6 +4,7 @@ import { IRoleService } from '../../../../services/role/role-service.interface';
 import { faCancel, faSave, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RoleMasterDto } from '../../../../models/role/role-master.model';
 
 @Component({
   selector: 'app-role-details',
@@ -16,7 +17,7 @@ export class RoleDetailsComponent implements OnChanges {
 
   @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
   @Input('isEdit') isEdit: boolean = false;
-  @Input('dataEdit') dataEdit: any;
+  @Input('dataEdit') dataEdit: RoleMasterDto | undefined;
 
   public faCancel: IconDefinition = faCancel;
   public faSave: IconDefinition = faSave;
@@ -51,13 +52,13 @@ export class RoleDetailsComponent implements OnChanges {
     const data = this.form.value;
 
     if (this.isEdit && this.dataEdit != null) {
-      this.roleService.update(this.dataEdit.id, data).subscribe((result) => {
+      this.roleService.update(this.dataEdit.id, data).subscribe((result: RoleMasterDto) => {
         if (result) {
           this.cancel.emit();
         }
       });
     } else {
-      this.roleService.create(data).subscribe((result) => {
+      this.roleService.create(data).subscribe((result: RoleMasterDto) => {
         if (result) {
           this.cancel.emit();
         }

@@ -8,6 +8,9 @@ import { faPlus, faSearch, IconDefinition } from '@fortawesome/free-solid-svg-ic
 import { RoleDetailsComponent } from "./role-details/role-details.component";
 import { TableComponent } from "../../../core/components/table/table.component";
 import { catchError, of } from 'rxjs';
+import { RoleMasterDto } from '../../../models/role/role-master.model';
+import { Column } from '../../../models/common/column.model';
+import { ResponseData } from '../../../models/response-data.model';
 
 @Component({
   selector: 'app-role-list',
@@ -26,12 +29,12 @@ export class RoleListComponent implements OnInit {
   public isShow: boolean = false;
   public isEdit: boolean = false;
 
-  public data: any[] = [];
-  public dataEdit: any;
+  public data: RoleMasterDto[] = [];
+  public dataEdit: RoleMasterDto | undefined;
 
   public response: string = '';
 
-  public columns: any[] = [
+  public columns: Column[] = [
     { name: 'name', title: 'Title' },
     { name: 'description', title: 'Description' },
     { name: 'active', title: 'Active' },
@@ -54,7 +57,7 @@ export class RoleListComponent implements OnInit {
     const param: any = {
       keyword: this.form.value.keyword,
     }
-    this.roleService.search(param).subscribe((result) => {
+    this.roleService.search(param).subscribe((result: ResponseData<RoleMasterDto>) => {
       if (result) {
         this.data = result.data;
       }
