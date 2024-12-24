@@ -17,7 +17,6 @@ export class MasterListComponent<T> {
 
   public pageSizes: number[] = [5, 10, 15, 20, 30];
 
-  public pageLimit: number = 3;
   public currentPage: number = 0;
   public currentPageSize: number = 5;
   public pageInfo!: PageInfo;

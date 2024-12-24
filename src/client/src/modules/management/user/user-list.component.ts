@@ -94,11 +94,6 @@ export class UserListComponent extends MasterListComponent<UserMasterDto> implem
     this.search();
   }
 
-  public getPageList(): number[] {
-    const start = Math.max(0, this.pageInfo.number - this.pageLimit);
-    const end = Math.min(this.pageInfo.totalPages - 1, this.pageInfo.number + this.pageLimit);
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-  }
 
   public onChangeNumber(item: number): void {
     this.currentPage = item;
