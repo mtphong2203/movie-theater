@@ -33,15 +33,52 @@
         ></app-table>
       </div>
     </div>
-    <div class="card-footer flex justify-end">
-      <button
-        type="button"
-        class="flex gap-1 p-2 rounded-lg text-white bg-blue-500"
-        (click)="onCreate()"
-      >
-        <fa-icon [icon]="faPlus"></fa-icon>
-        <span>Add</span>
-      </button>
+    <div class="card-footer">
+      <div class="paginated flex justify-between items-center">
+        <div class="page-size flex items-center">
+          <label for="size">Page Size:</label>
+          <select
+            id="size"
+            class="border ml-1 p-1 cursor-pointer rounded-lg"
+            (change)="onChangeSize($event)"
+          >
+            <option *ngFor="let item of pageSizes">{{ item }}</option>
+          </select>
+        </div>
+        <div class="page-number">
+          <ul class="flex gap-2">
+            <li
+              [ngClass]="{ 'bg-blue-500 text-white': currentPage == item }"
+              class="rounded-full border px-2 hover:bg-blue-500 hover:text-white"
+              *ngFor="let item of getPageList()"
+            >
+              <button (click)="onChangeNumber(item)">{{ item + 1 }}</button>
+            </li>
+          </ul>
+        </div>
+        <div class="page-info">
+          <span>{{ pageInfo.size * pageInfo.number + 1 }} - </span>
+          <span
+            >{{
+              (pageInfo.number + 1) * pageInfo.size > pageInfo.totalElements
+                ? pageInfo.totalElements
+                : (pageInfo.number + 1) * pageInfo.size
+            }}
+            of
+          </span>
+          <span>{{ pageInfo.totalElements }}</span>
+        </div>
+      </div>
+      <div class="button flex justify-end">
+        <button
+          type="button"
+          class="flex gap-1 p-2 rounded-lg text-white bg-blue-500"
+          (click)="onCreate()"
+        >
+          <fa-icon [icon]="faPlus"></fa-icon>
+          <span>Add</span>
+        </button>
+      </div>
     </div>
   </div>
 
