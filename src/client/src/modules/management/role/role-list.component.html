@@ -27,9 +27,14 @@
         <p class="text-center text-xl text-green-500 my-2">{{ response }}</p>
         <app-table
           [data]="data"
+          [pageInfo]="pageInfo"
+          [pageSizes]="pageSizes"
+          [currentPage]="currentPage"
           [columns]="columns"
           (edit)="onEdit($event)"
           (delete)="onDelete($event)"
+          (changeSize)="onChangeSize($event)"
+          (changeNumber)="onChangeNumber($event)"
         ></app-table>
       </div>
     </div>

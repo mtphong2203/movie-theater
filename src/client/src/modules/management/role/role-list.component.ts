@@ -43,10 +43,13 @@ export class RoleListComponent extends MasterListComponent<RoleMasterDto> implem
   private search(): void {
     const param: any = {
       keyword: this.form.value.keyword,
+      page: this.currentPage,
+      size: this.currentPageSize
     }
     this.roleService.search(param).subscribe((result: ResponseData<RoleMasterDto>) => {
       if (result) {
         this.data = result.data;
+        this.pageInfo = result.page
       }
     })
   }
@@ -89,6 +92,15 @@ export class RoleListComponent extends MasterListComponent<RoleMasterDto> implem
     this.search();
   }
 
+  public onChangeSize(size: any): void {
+    this.currentPageSize = size.target.value;
+    this.search();
+  }
+
+  public onChangeNumber(number: number): void {
+    this.currentPage = number;
+    this.search();
+  }
 
 
 
