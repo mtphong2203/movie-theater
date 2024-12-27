@@ -1,0 +1,60 @@
+<div class="contain mt-4">
+  <h2 class="text-center text-3xl font-medium">Contact Us</h2>
+  <p class="text-green-500 text-center my-4 text-lg">{{ response }}</p>
+  <div class="content flex justify-between">
+    <div class="contact w-[60%]">
+      <h3 class="text-2xl font-serif mb-2">
+        We will always be here for your , send to us a message if you have
+        something wondering
+      </h3>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <div class="form-group mb-2">
+            <label class="text-lg" for="email">Email</label>
+            <input
+              type="email"
+              class="w-full border border-slate-500 rounded-md p-1 text-black"
+              formControlName="email"
+              id="email"
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group mb-2">
+            <label class="text-lg" for="message">Message</label>
+            <textarea
+              formControlName="message"
+              class="w-full border border-slate-500 rounded-md p-1 text-black"
+              id="message"
+              placeholder="Enter message..."
+            ></textarea>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="p-2 px-4 bg-blue-500 text-white rounded-lg"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+    <div class="detail">
+      <div class="contact">
+        <h3 class="text-2xl font-serif mb-3">Information</h3>
+        <p class="text-lg mb-2 font-serif">Phone: +86 8647 8765</p>
+        <p class="text-lg mb-2 font-serif">
+          Email: movie-theater&#64;gmail.com
+        </p>
+        <p class="text-lg mb-2 font-serif">
+          Address: Ngo 63, Pho Ha Dong, Tp Ha Noi
+        </p>
+        <div class="navigate mt-2 flex gap-4">
+          <fa-icon [icon]="faFacebook" class="text-blue-500 text-3xl"></fa-icon>
+          <fa-icon [icon]="faYoutube" class="text-red-600 text-3xl"></fa-icon>
+          <fa-icon [icon]="faTwitter" class="text-blue-800 text-3xl"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

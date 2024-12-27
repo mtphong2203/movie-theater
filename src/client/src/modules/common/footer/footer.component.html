@@ -1,0 +1,71 @@
+<footer class="bg-gray-900 text-gray-300">
+  <div class="footer__contain w-[80%] m-auto py-4 flex justify-between">
+    <div class="contact w-[25%]">
+      <h2 class="text-2xl font-medium text-gray-200 mb-1">Contact</h2>
+      <ul class="flex flex-col gap-2">
+        <li>
+          <a [routerLink]="['/contact']" class="hover:text-red-600">Contact</a>
+        </li>
+        <li>
+          <a [routerLink]="['/contact']" class="hover:text-red-600"
+            >Ticket Prices</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['/contact']" class="hover:text-red-600">News</a>
+        </li>
+        <li>
+          <a [routerLink]="['/contact']" class="hover:text-red-600"
+            >Show Dates</a
+          >
+        </li>
+      </ul>
+      <div class="navigate mt-2 flex gap-4">
+        <fa-icon [icon]="faFacebook" class="text-blue-500 text-2xl"></fa-icon>
+        <fa-icon [icon]="faYoutube" class="text-red-600 text-2xl"></fa-icon>
+        <fa-icon [icon]="faTwitter" class="text-white text-2xl"></fa-icon>
+      </div>
+    </div>
+    <div class="detail w-[50%]">
+      <h2 class="text-2xl font-medium text-gray-200 mb-1">M-Theater</h2>
+      <p class="mb-2 font-medium">
+        Cơ quan chủ quản: BỘ VĂN HÓA, THỂ THAO VÀ DU LỊCH
+      </p>
+      <p class="mb-2 font-medium">
+        Bản quyền thuộc Trung tâm Chiếu phim Quốc gia.
+      </p>
+      <p class="mb-2 font-medium">
+        Giấy phép số: 224/GP- TTĐT ngày 31/8/2010 - Chịu trách nhiệm: Mai Phong.
+      </p>
+      <p class="mb-2 font-medium">
+        Địa chỉ: 87 Láng Hạ, Quận Ba Đình, Tp. Hà Nội - Điện thoại: 024.35141791
+      </p>
+    </div>
+
+    <div class="subcribe w-[25%]">
+      <h3 class="text-2xl font-medium text-gray-200 mb-1">Subscribe us</h3>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-control flex justify-between gap-2">
+          <input
+            type="text"
+            name="email"
+            class="rounded-md w-[75%] p-1 px-2"
+            [(ngModel)]="email"
+            id="email"
+            placeholder="Enter email"
+          />
+          <button
+            type="submit"
+            class="p-1 bg-red-600 text-white w-[25%] rounded-md border"
+          >
+            Subscribe
+          </button>
+        </div>
+      </form>
+      <div class="logo flex gap-4 mt-4">
+        <img [src]="google" class="w-32 h-14" alt="" />
+        <img [src]="app" class="w-32 h-14" alt="" />
+      </div>
+    </div>
+  </div>
+</footer>
